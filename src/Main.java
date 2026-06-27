@@ -1,36 +1,46 @@
-
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String choice = "1";
-//
-        while (choice.equals("1")) {
+        Scanner sc = new  Scanner(System.in);
+        System.out.println("=============== NHẬP THÔNG TIN HÓA ĐƠN ===============");
+        System.out.print("Tên khách hàng: ");
+        String nameCustomer = sc.nextLine();
 
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Nhập vào số N: ");
-            int n = Integer.parseInt(sc.nextLine());
-            int tong =0;
-        if(n<=0) System.out.println("Số nhập vào không hợp lệ!");
-        else
-        {
-            for(int i=1;i<=n;i++)
-            {
-                tong = tong+i;
-            } System.out.printf("Tổng các chữ số từ 1 đến %d là: %d",n, tong);
-        }
+        System.out.print("Tên sản phẩm: ");
+        String nameProduct = sc.nextLine();
+
+        System.out.print("Giá sản phẩm: ");
+        double priceProduct = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Số lượng mua: ");
+        int quantity = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Thẻ thành viên? (true/false): ");
+        boolean cardCustomer = sc.nextBoolean();
+
+        double totalPrice = priceProduct * quantity;
+        double priceSale =1;
+        if(cardCustomer == true)  priceSale  = totalPrice * 0.1;
+        else priceSale = 0;
+
+        double vat = totalPrice * 0.08;
+
+        double totalPayment = totalPrice - priceSale + vat;
+
+        System.out.printf("Khách hàng: %s\n",nameCustomer);
+        System.out.printf("Sản phẩm: %s\n",nameProduct);
+        System.out.printf("Giá: %.2f VNĐ\n",priceProduct);
+        System.out.printf("Số lượng: %d\n",quantity);
+        System.out.printf("Thành tiền: %.2f VNĐ\n",totalPrice);
+        System.out.printf("Giảm giá: %.2f VNĐ\n",priceSale);
+        System.out.printf("Tiền VAT: %.2f VNĐ\n",vat);
+        System.out.printf("Tổng tiền thanh toán: %.2f VNĐ",totalPayment);
 
 
 
-
-
-            System.out.println("\nBạn có muốn nhập lại không? ");
-            System.out.println("nếu có ấn phím 1, nếu không ấn bất kì để thoát! ");
-            choice = sc.nextLine();
-        }
     }
-
-
 }
