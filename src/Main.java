@@ -12,18 +12,15 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             System.out.println("Nhập vào số N: ");
             int n = Integer.parseInt(sc.nextLine());
-            if (n<0) n=n*-1;
-            int soDu,soChia,tong = 0;
-            do {
-
-                soDu = n%10;
-                soChia = n/10;
-                tong = tong +soDu;
-                n=n/10;
-
-
-            }while(soChia > 0);
-            System.out.printf("Tổng các chữ số là: %d",tong);
+            int tong =0;
+        if(n<=0) System.out.println("Số nhập vào không hợp lệ!");
+        else
+        {
+            for(int i=1;i<=n;i++)
+            {
+                tong = tong+i;
+            } System.out.printf("Tổng các chữ số từ 1 đến %d là: %d",n, tong);
+        }
 
 
 
