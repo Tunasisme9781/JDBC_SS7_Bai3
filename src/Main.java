@@ -1,4 +1,6 @@
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -6,40 +8,69 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new  Scanner(System.in);
-        System.out.println("=============== NHẬP THÔNG TIN HÓA ĐƠN ===============");
-        System.out.print("Tên khách hàng: ");
-        String nameCustomer = sc.nextLine();
+float min ,max  ,mid ,sum = 0;
+        float[] arr = new float[0];
 
-        System.out.print("Tên sản phẩm: ");
-        String nameProduct = sc.nextLine();
+int choice , i=0;
+float point ;
+do {
+    System.out.println("\n*********** MENU NHẬP ĐIỂM ***********");
+    System.out.println("1.     Nhập điểm học viên");
+    System.out.println("2.     Hiển thị thống kê");
+    System.out.println("3.     Thoát");
+    System.out.println("Lựa chọn của bạn: ");
+     choice = Integer.parseInt(sc.nextLine());
 
-        System.out.print("Giá sản phẩm: ");
-        double priceProduct = Double.parseDouble(sc.nextLine());
+    switch (choice) {
+        case 1:
 
-        System.out.print("Số lượng mua: ");
-        int quantity = Integer.parseInt(sc.nextLine());
+            System.out.println("\n--- Nhập điểm học viên (nhập -1 để dừng) ---");
 
-        System.out.print("Thẻ thành viên? (true/false): ");
-        boolean cardCustomer = sc.nextBoolean();
+            System.out.print("Nhập điểm: ");
+            point = Float.parseFloat(sc.nextLine());
 
-        double totalPrice = priceProduct * quantity;
-        double priceSale =1;
-        if(cardCustomer == true)  priceSale  = totalPrice * 0.1;
-        else priceSale = 0;
+            if(point ==-1) break;
+            while (point < 0 || point > 10){
+                System.err.print("Điểm không hợp lệ. Nhập lại: ");
+                point = Float.parseFloat(sc.nextLine());
+            }
+            if(0<=point && point < 5) System.out.printf("Học lực: yếu");
+            else if(5<=point && point < 7 ) System.out.printf("Học lực: Trung Bình");
+            else if(7 <=point && point < 8) System.out.printf("Học lực: Khá");
+            else if(8 <=point && point < 9) System.out.printf("Học lực: Giỏi");
+            else  System.out.printf("Học lực: Xuất sắc");
 
-        double vat = totalPrice * 0.08;
+            arr = Arrays.copyOf(arr, arr.length + 1);
 
-        double totalPayment = totalPrice - priceSale + vat;
+            arr[arr.length - 1]  = point;
+            i++;
+            System.out.println(Arrays.toString(arr));            break;
 
-        System.out.printf("Khách hàng: %s\n",nameCustomer);
-        System.out.printf("Sản phẩm: %s\n",nameProduct);
-        System.out.printf("Giá: %.2f VNĐ\n",priceProduct);
-        System.out.printf("Số lượng: %d\n",quantity);
-        System.out.printf("Thành tiền: %.2f VNĐ\n",totalPrice);
-        System.out.printf("Giảm giá: %.2f VNĐ\n",priceSale);
-        System.out.printf("Tiền VAT: %.2f VNĐ\n",vat);
-        System.out.printf("Tổng tiền thanh toán: %.2f VNĐ",totalPayment);
+        case 2:
+             min = arr[0];
+             max = arr[0];
+            sum = 0;
 
+            for(int j = 0; j < i; j++) {
+                sum += arr[j];
+
+                if(arr[j] > max) max = arr[j];
+                if(arr[j] < min) min = arr[j];
+            }
+            float avg = sum /i;
+            System.out.println("--- KẾT QUẢ ---");
+            System.out.printf("Số học viên đã nhập: %d\n",i);
+            System.out.printf("Điểm trung bình: %.2f\n",avg);
+            System.out.printf("Điểm cao nhất: %.2f\n",max);
+
+            System.out.printf("Điểm thấp nhất: %.2f\n",min);
+            System.out.printf("Kết thúc chương trình.\n");
+            break;
+
+
+
+    }
+}while (choice != 3);
 
 
     }
