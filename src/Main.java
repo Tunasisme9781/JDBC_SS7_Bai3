@@ -11,11 +11,6 @@ public class Main {
         System.out.print("Nhập số phần tử của mảng: ");
         elementCount = Integer.parseInt(sc.nextLine());
 
-        if (elementCount == 0) {
-            System.out.println("Mảng không có phần tử");
-            System.exit(0);
-        }
-
         int[] arr = new int[elementCount];
 
         for (int i = 0; i < elementCount; i++) {
@@ -34,35 +29,74 @@ public class Main {
             } while (true);
         }
 
-        System.out.println("\nMảng ban đầu:");
+        // Selection Sort giảm dần
+        for (int i = 0; i < elementCount - 1; i++) {
+
+            int maxIndex = i;
+
+            for (int j = i + 1; j < elementCount; j++) {
+                if (arr[j] > arr[maxIndex]) {
+                    maxIndex = j;
+                }
+            }
+
+            int temp = arr[i];
+            arr[i] = arr[maxIndex];
+            arr[maxIndex] = temp;
+        }
+
+        System.out.println("\nMảng sau khi sắp xếp giảm dần:");
 
         for (int i = 0; i < elementCount; i++) {
             System.out.print(arr[i] + " ");
         }
 
-        int[] result = new int[elementCount];
-        currentIndex = 0;
+        System.out.println();
 
-        // Đưa số chẵn vào trước
+        int number;
+
+        System.out.print("\nNhập số cần tìm: ");
+        number = Integer.parseInt(sc.nextLine());
+
+        // Linear Search
+        boolean found = false;
+
         for (int i = 0; i < elementCount; i++) {
-            if (arr[i] % 2 == 0) {
-                result[currentIndex] = arr[i];
-                currentIndex++;
+            if (arr[i] == number) {
+                System.out.println("Linear Search: Tìm thấy tại vị trí " + (i + 1));
+                found = true;
+                break;
             }
         }
 
-        // Đưa số lẻ vào sau
-        for (int i = 0; i < elementCount; i++) {
-            if (arr[i] % 2 != 0) {
-                result[currentIndex] = arr[i];
-                currentIndex++;
+        if (!found) {
+            System.out.println("Linear Search: Không tìm thấy!");
+        }
+
+        // Binary Search trên mảng giảm dần
+        int left = 0;
+        int right = elementCount - 1;
+        found = false;
+
+        while (left <= right) {
+
+            int mid = (left + right) / 2;
+
+            if (arr[mid] == number) {
+                System.out.println("Binary Search: Tìm thấy tại vị trí " + (mid + 1));
+                found = true;
+                break;
+            }
+
+            if (number > arr[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
 
-        System.out.println("\nMảng sau khi sắp xếp:");
-
-        for (int i = 0; i < elementCount; i++) {
-            System.out.print(result[i] + " ");
+        if (!found) {
+            System.out.println("Binary Search: Không tìm thấy!");
         }
 
     }
