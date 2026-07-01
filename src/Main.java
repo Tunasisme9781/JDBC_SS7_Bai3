@@ -5,59 +5,51 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        int row, col;
-        int currentRow = 0;
-        int currentCol = 0;
+        int n;
+        int currentIndex = 0;
 
-        System.out.print("Nhập số hàng: ");
-        row = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhập số phần tử của mảng: ");
+        n = Integer.parseInt(sc.nextLine());
 
-        System.out.print("Nhập số cột: ");
-        col = Integer.parseInt(sc.nextLine());
+        int[] arr = new int[n];
 
-        int[][] arr = new int[row][col];
+        for (int i = 0; i < n; i++) {
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+            System.out.printf("Nhập phần tử %d: ", currentIndex + 1);
 
-                System.out.printf("Nhập phần tử [%d][%d]: ", currentRow, currentCol);
+            do {
+                try {
+                    arr[currentIndex] = Integer.parseInt(sc.nextLine());
+                    currentIndex++;
+                    break;
 
-                do {
-                    try {
-                        arr[currentRow][currentCol] = Integer.parseInt(sc.nextLine());
-                        break;
+                } catch (NumberFormatException e) {
+                    System.err.print("Phần tử phải là số nguyên! Nhập lại: ");
+                }
 
-                    } catch (NumberFormatException e) {
-                        System.err.print("Phần tử phải là số nguyên! Nhập lại: ");
-                    }
-
-                } while (true);
-
-                currentCol++;
-            }
-            currentRow++;
-            currentCol = 0;
+            } while (true);
         }
 
-        int sumEven = 0;
-        int sumOdd = 0;
+        // Bubble Sort giảm dần
+        for (int i = 0; i < n - 1; i++) {
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+            for (int j = 0; j < n - i - 1; j++) {
 
-                if (arr[i][j] % 2 == 0) {
-                    sumEven += arr[i][j];
-                } else {
-                    sumOdd += arr[i][j];
+                if (arr[j] < arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
 
             }
+
         }
 
-        System.out.println("\nKết quả:");
+        System.out.println("\nMảng sau khi sắp xếp giảm dần:");
 
-        System.out.println("Tổng số chẵn: " + sumEven);
-        System.out.println("Tổng số lẻ: " + sumOdd);
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
 
     }
 }
